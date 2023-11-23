@@ -22,10 +22,6 @@ def check_base_ip(function):
     '''
     def base_ip_access(obj, *args, **kwargs):
         global ip_base_secret
-        if ip_base_secret:
-            ip_host = socket.gethostbyname(obj.host)
-            if ip_host != ip_base_secret:
-                raise BaseIpError("IP của host hiện tại không hợp lệ !", str(ip_host), ip_base_secret)
         os_desktop = platform.platform().lower()
         if os_desktop.startswith('windows'):
             file_host = os.path.join(os.environ['SYSTEMROOT'], 'System32', 'drivers', 'etc', 'hosts')
@@ -33,7 +29,11 @@ def check_base_ip(function):
             file_host = '/etc/hosts'
         data_hosts = open(file_host, 'r', encoding='utf-8-sig').read()
         if obj.host in data_hosts: 
-            raise PermissionDenied("Bạn không có quyền truy cập")
+            raise PermissionDenied('', "Bạn không có quyền truy cập")
+        if ip_base_secret:
+            ip_host = socket.gethostbyname(obj.host)
+            if ip_host != ip_base_secret:
+                raise BaseIpError("IP của host hiện tại không hợp lệ !", str(ip_host), ip_base_secret)
         return function(obj, *args, **kwargs)
     return base_ip_access
 

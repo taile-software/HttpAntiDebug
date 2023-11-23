@@ -6,13 +6,13 @@ dirname = os.path.abspath(os.path.dirname(__file__))
 name_pkg = 'HttpAntiDebug'
 
 with codecs.open(os.path.join(dirname, name_pkg, "__version__.py"), mode="r", encoding="utf-8") as fp:
-    # try:
+    try:
         data = fp.read()
         version = re.findall(r"^__version__ = ['\"]([^'\"]*)['\"]", data, re.M)[0]
         email = re.findall(r"^__author_email__ = ['\"](.*?)['\"]", data, re.M)[0]
         author  = re.findall(r"^__author__ = ['\"]([^'\"]*)['\"]", data, re.M)[0]
-    # except Exception:
-    #     raise RuntimeError("Unable to determine info")
+    except Exception:
+        raise RuntimeError("Unable to determine info")
 
 description = (
     "Bạn là 1 nhà phát triển phần mềm, công cụ ?",
@@ -31,6 +31,7 @@ setup(
     url='URL Đến Repository Của Gói',
     packages=find_packages(),
     classifiers=[
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
