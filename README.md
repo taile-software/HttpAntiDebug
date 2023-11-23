@@ -3,12 +3,12 @@ https://github.com/taile-software/HttpAntiDebug
 
 Hiện tại có rất nhiều đối tượng xấu đã sử sụng 1 thủ thuật là bắt traffic http để có response và fake 1 server localhost để fake server của 1 phần mềm, tools,...
 
-** Thư viện này sẽ giúp bạn vá đi được phần nào đó của lỗ hổng này ( không thể an toàn tuyệt đối ) **
+**Thư viện này sẽ giúp bạn vá đi được phần nào đó của lỗ hổng này ( không thể an toàn tuyệt đối )**
 
 * Vẫn hoạt động ổn định cho tới hiện tại
 * Sử dụng Python >= 3.6
 
-## ** Installation ** ##
+## **Installation** ##
 ```
 pip install HttpAntiDebug
 ```
@@ -17,7 +17,7 @@ hoặc bạn có thể install từ github:
 pip install git+https://github.com/taile-software/HttpAntiDebug@master
 ```
 
-## ** Chi tiết ** ##
+## **Chi tiết** ##
 
 Thư viện được xây dựng trên nền tảng socket để tránh bị ghi lại các traffic http
 
@@ -30,15 +30,15 @@ print(req.text)
 print(req.headers)
 ```
 
-** Về cơ bản cách dùng của ```HttpAntiDebug``` chỉ khác 1 chút không đáng kể tại lớp quản lý phiên ```Session``` **
+**Về cơ bản cách dùng của ```HttpAntiDebug``` chỉ khác 1 chút không đáng kể tại lớp quản lý phiên ```Session```**
 
-Trong ```requests``` Session được quản lí 1 theo hướng mở còn ```HttpAntiDebug``` chỉ quản lí giữa *** Client *** và *** Server*** cố định
+Trong ```requests``` Session được quản lí 1 theo hướng mở còn ```HttpAntiDebug``` chỉ quản lí giữa ***Client*** và ***Server*** cố định
 
-## *** Trươc khi dùng *** ##
+## ***Trươc khi dùng*** ##
 
 ![Screenshot 2023-11-23 230206](https://github.com/taile-software/HttpAntiDebug/assets/151706988/38be65c5-8a4c-4c10-b012-8b58b0cb0e51)
 
-## *** Sau khi dùng *** ##
+## ***Sau khi dùng*** ##
 
 ![Screenshot 2023-11-23 230544](https://github.com/taile-software/HttpAntiDebug/assets/151706988/7df1f2cc-26cd-4134-bd72-f59fd97dbeae)
 
@@ -61,7 +61,7 @@ Ngoài ra thư viện cung cấp 1 khả năng nhẹ nữa chống chỉnh sửa
 ![Screenshot 2023-11-23 231222](https://github.com/taile-software/HttpAntiDebug/assets/151706988/aab2566c-2931-49b6-8f17-2d8867751004)
 
 
-# ** Usage ** #
+# **Usage** #
 
 ## Methode cơ bản ##
 
@@ -102,13 +102,13 @@ headers = {
 rq = hd.get('https://example.com', headers = headers)
 ```
 
-## SessionServer ##
+> ## SessionServer ##
 
-Trong *** ```HttpAntiDebug``` *** có phương thức lớp *** ```SessionServer``` *** giống *** ```Session``` *** của *** ```requests``` ***
+Trong ***```HttpAntiDebug```*** có phương thức lớp ***```SessionServer```*** giống ***```Session```*** của ***```requests```***
 
-Tuy nhiên không giống 100% mà trong *** ```HttpAntiDebug``` *** sẽ có sự thay đổi nhẹ của lớp này
+Tuy nhiên không giống 100% mà trong ***```HttpAntiDebug```*** sẽ có sự thay đổi nhẹ của lớp này
 
-Lớp *** ```SessionServer``` *** sẽ chỉ giữ kết nối duy nhất 2 đầu là *** Client *** và ***Server***, ngoài ra nếu bạn muốn thêm kết nối tới 1 host khác thì đồng nghĩa với việc bạn phải gọi Phương thức này 1 lần nữa
+Lớp ***```SessionServer```*** sẽ chỉ giữ kết nối duy nhất 2 đầu là ***Client*** và ***Server***, ngoài ra nếu bạn muốn thêm kết nối tới 1 host khác thì đồng nghĩa với việc bạn phải gọi Phương thức này 1 lần nữa
 
 ```
 from AntiDebug import SessionServer as SV
@@ -117,7 +117,7 @@ sess = SV('https://jsonip.com')
 
 ```
 
-Thay vì mỗi lần tạo giao thức phải điền cả 1 url vào thì với *** ```HttpAntiDebug.SessionServer``` *** chỉ cần điền tham số là ```path```
+Thay vì mỗi lần tạo giao thức phải điền cả 1 url vào thì với ***```HttpAntiDebug.SessionServer```*** chỉ cần điền tham số là ```path```
 
 >PATH: Là đường dẫn địa chỉ dẫn tới mục tài nguyên được lưu trữ tại server
 
@@ -126,7 +126,7 @@ sess.get('/').text
 sess.post('/auth/login', data = {'username': "example", 'password': "ExamplePassword123"}).json
 ```
 
-# ** Kết thúc ** #
+# **Kết thúc** #
 
 ## Contact ##
 
