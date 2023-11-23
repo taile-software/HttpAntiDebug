@@ -8,10 +8,19 @@ __attrs__ = [
 class Response:
     
     def __init__(self, response) -> None:
+        status_line, _, rest = response.partition('\r\n')
+        self.status_code = self._parse_status_line(status_line)
         headers, _, body = response.partition('\r\n\r\n')
         self.headers = self._parse_headers(headers)
         self.body = self._parse_body(body)
 
+    def _parse_status_line(self, status_line):
+        parts = status_line.split(' ', 2)
+        if len(parts) >= 2 and parts[1].isdigit():
+            return int(parts[1])
+        else:
+            raise ValueError("Không thể phân tích dòng trạng thái HTTP.")
+        
     def _parse_headers(self, headers):
         header_lines = headers.split('\r\n')
         header_dict = {}

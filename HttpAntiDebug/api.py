@@ -1,6 +1,7 @@
 import socket
 from .response import Response
-import ssl, json
+import ssl, json, time
+from .exception import *
 from urllib.parse import urlparse
 import urllib.parse
 
@@ -38,27 +39,34 @@ def _send_request(method, url, headers=None, data=None):
     host, port, request = _requests(method, url, headers, data)
     parsed_url = urlparse(url)
     secure = parsed_url.scheme == 'https'
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        if secure:
-            context = ssl.create_default_context()
-            with context.wrap_socket(sock, server_hostname=host) as ssock:
-                ssock.connect((host, port))
-                ssock.sendall(request)
-                response = b""
-                while True:
-                    recv = ssock.recv(4096)
-                    if not recv:
-                        break
-                    response += recv
-        else:
-            sock.connect((host, port))
-            sock.sendall(request)
-            response = b""
-            while True:
-                recv = sock.recv(4096)
-                if not recv:
-                    break
-                response += recv
+    for _ in range(5):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                if secure:
+                    context = ssl.create_default_context()
+                    with context.wrap_socket(sock, server_hostname=host) as ssock:
+                        ssock.connect((host, port))
+                        ssock.sendall(request)
+                        response = b""
+                        while True:
+                            recv = ssock.recv(4096)
+                            if not recv:
+                                break
+                            response += recv
+                else:
+                    sock.connect((host, port))
+                    sock.sendall(request)
+                    response = b""
+                    while True:
+                        recv = sock.recv(4096)
+                        if not recv:
+                            break
+                        response += recv
+                connected = True
+        except: 
+            connected = False
+            time.sleep(1)
+        if not connected: raise ConnectionError('', 'Không thể kết nối tới HOST: {}, PORT: {}\nĐã quá giới hạn số lần thử lại nhưng vẫn không thể kết nối tới server'.format(host, port))
     return Response(response.decode())
 
 def get(url, headers=None):

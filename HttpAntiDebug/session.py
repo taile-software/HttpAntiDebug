@@ -174,9 +174,4 @@ class SessionServer:
             `path`: là các đường path dùng để kiểm tra các phương thức HTTP được hỗ trợ: VD: /check.php, ...
         '''
         return self.request("OPTIONS", path, headers)
-
-# session = SessionServer("https://api.tlsoftwaresolutions.pro")
-# print(session.post('/api/login.php', data={'username': 'admin', 'password': 'AdminTool'}).json)
-# response = session.post("/api/register.php", data= {'username': 'admin', 'password': 'AdminTool'})
-# print(response.json)
-# session.get()
+    
