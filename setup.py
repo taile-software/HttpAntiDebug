@@ -28,7 +28,7 @@ setup(
     description=description,
     long_description=open(os.path.join(dirname, "README.md"), encoding="utf-8").read(),
     long_description_content_type='text/markdown',
-    url='URL Đến Repository Của Gói',
+    url="https://github.com/taile-software/HttpAntiDebug",
     packages=find_packages(),
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
