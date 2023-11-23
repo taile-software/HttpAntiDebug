@@ -14,11 +14,7 @@ with codecs.open(os.path.join(dirname, name_pkg, "__version__.py"), mode="r", en
     except Exception:
         raise RuntimeError("Unable to determine info")
 
-description = (
-    "Bạn là 1 nhà phát triển phần mềm, công cụ ?",
-    "Thư viện này có thể giúp ích cho bạn đó, nó giúp bạn ẩn các traffic của http qua các phần mềm đọc traffic gửi đi nhằm gian lận phần mềm, công cụ, ...",
-    "NOTE: Chỉ giúp bạn cải thiện phần nào bảo mật, không thể giúp bạn tránh hoàn toàn các cuộc gian lận",
-)
+description = 'Bạn là 1 nhà phát triển phần mềm, công cụ ?\nThư viện này có thể giúp ích cho bạn đó, nó giúp bạn ẩn các traffic của http qua các phần mềm đọc traffic gửi đi nhằm gian lận phần mềm, công cụ, ...\nNOTE: Chỉ giúp bạn cải thiện phần nào bảo mật, không thể giúp bạn tránh hoàn toàn các cuộc gian lận'
 
 setup(
     name=name_pkg,
